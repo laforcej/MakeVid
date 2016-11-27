@@ -1,5 +1,5 @@
 Const PADDING = 4
-Const CONFIG_FILE = "C:\Users\jeffl\Documents\Projects\TestProject\WindowsApplication1\WindowsApplication1\bin\Debug\config.ini"
+Const ROOT_PATH = "C:\Users\<%user_name%>\Documents\MakeVid\"
 
 Dim objFSO, objRootFolder, objFiles, objTextStream
 Dim intCounter
@@ -9,14 +9,8 @@ Set objWSH = CreateObject("WScript.Shell")
 Set objFSO = WScript.CreateObject("Scripting.FileSystemObject")
 
 If objFSO.FileExists(CONFIG_FILE) then
-	Set objTextStream = objFSO.OpenTextFile(CONFIG_FILE, 1)
-	strRootPath = objTextStream.ReadLine
+	Set objRootFolder = objFSO.GetFolder(ROOT_PATH)
 	
-	Set objRootFolder = objFSO.GetFolder(strRootPath)
-	
-	objTextStream.Close
-	Set objTextStream = Nothing
-
 	For Each Folder in objRootFolder.SubFolders
 		Set objScreensFolder = objFSO.GetFolder(Folder.Path & "\screens\")
 	
